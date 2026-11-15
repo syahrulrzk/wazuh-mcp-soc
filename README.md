@@ -45,6 +45,27 @@ changes.
 | Vulnerability Exposure | CVE exposure by severity, agent, package, and affected estate. |
 | FIM Overview | File integrity changes, monitored locations, agents, and rule activity. |
 
+### Dashboard Screenshots
+
+Sensitive hostnames, source IPs, usernames, URLs, and file paths are redacted in
+the screenshots below.
+
+![Wazuh SOC Priority Queue](image/Wazuh%20SOC%20Priority%20Queue.png)
+
+![Wazuh Nginx Attack Overview](image/Wazuh%20Nginx%20Attack%20Overview.png)
+
+![Wazuh Access Anomaly](image/Wazuh%20Access%20Anomaly.png)
+
+![Wazuh SSH Brute Force Deep Dive](image/Wazuh%20SSH%20Brute%20Force%20Deep%20Dive.png)
+
+![Wazuh Credential Abuse](image/Wazuh%20Credential%20Abuse.png)
+
+![Wazuh Critical Host](image/Wazuh%20Critical%20Host.png)
+
+![Wazuh Vulnerability Exposure](image/Wazuh%20Vulnerability%20Exposure.png)
+
+![Wazuh FIM Overview](image/Wazuh%20FIM%20Overview.png)
+
 ## Requirements
 
 - Python 3.8+
