@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve Wazuh MCP Local.
+Thanks for helping improve Wazuh MCP SOC.
 
 ## Development
 

@@ -23,6 +23,7 @@ DEFAULT_KIBANA_INDEX = ".kibana"
 DEFAULT_CERT = "/etc/wazuh-indexer/certs/admin.pem"
 DEFAULT_KEY = "/etc/wazuh-indexer/certs/admin-key.pem"
 DEFAULT_CA = "/etc/wazuh-indexer/certs/root-ca.pem"
+PROJECT_DIR = Path(__file__).resolve().parent
 
 
 class OpenSearchClient:
@@ -1105,7 +1106,7 @@ def analyze_ssh_bruteforce(args: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def backup_saved_objects(args: Dict[str, Any]) -> Dict[str, Any]:
-    out_dir = Path(str(args.get("output_dir") or "/root/wazuh-mcp/backups"))
+    out_dir = Path(str(args.get("output_dir") or PROJECT_DIR / "backups"))
     out_dir.mkdir(parents=True, exist_ok=True)
     timestamp = dt.datetime.now().strftime("%Y%m%d-%H%M%S")
     out_file = out_dir / f"kibana-saved-objects-{timestamp}.ndjson"
@@ -1129,7 +1130,7 @@ def backup_saved_objects(args: Dict[str, Any]) -> Dict[str, Any]:
 def create_dashboard_ndjson(args: Dict[str, Any]) -> Dict[str, Any]:
     title = str(args.get("title") or "Wazuh SOC Triage").strip()[:120]
     min_level = clamp_int(args.get("min_level"), 7, 0, 16)
-    out_dir = Path(str(args.get("output_dir") or "/root/wazuh-mcp/dashboards"))
+    out_dir = Path(str(args.get("output_dir") or PROJECT_DIR / "dashboards"))
     out_dir.mkdir(parents=True, exist_ok=True)
     slug = "".join(ch.lower() if ch.isalnum() else "-" for ch in title).strip("-") or "wazuh-dashboard"
     dashboard_id = f"dashboard-{slug}"
@@ -1329,7 +1330,7 @@ TOOLS: Dict[str, Dict[str, Any]] = {
         "description": "Back up the raw .kibana saved objects index to local NDJSON.",
         "inputSchema": {
             "type": "object",
-            "properties": {"output_dir": {"type": "string", "default": "/root/wazuh-mcp/backups"}},
+            "properties": {"output_dir": {"type": "string", "default": "./backups"}},
             "additionalProperties": False,
         },
         "handler": backup_saved_objects,
@@ -1342,7 +1343,7 @@ TOOLS: Dict[str, Dict[str, Any]] = {
                 "title": {"type": "string", "default": "Wazuh SOC Triage"},
                 "min_level": {"type": "integer", "minimum": 0, "maximum": 16, "default": 7},
                 "index_pattern_id": {"type": "string", "default": "wazuh-alerts-*"},
-                "output_dir": {"type": "string", "default": "/root/wazuh-mcp/dashboards"},
+                "output_dir": {"type": "string", "default": "./dashboards"},
             },
             "additionalProperties": False,
         },
@@ -1399,7 +1400,7 @@ def handle_request(message: Dict[str, Any]) -> Optional[Dict[str, Any]]:
             result = {
                 "protocolVersion": params.get("protocolVersion") or "2024-11-05",
                 "capabilities": {"tools": {}},
-                "serverInfo": {"name": "wazuh-mcp-local", "version": "0.1.0"},
+                "serverInfo": {"name": "wazuh-mcp-soc", "version": "0.1.0"},
             }
         elif method == "tools/list":
             result = mcp_tool_list()

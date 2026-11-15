@@ -1,7 +1,7 @@
 {
   "mcpServers": {
-    "wazuh-local": {
-      "command": "/root/wazuh-mcp/run.sh"
+    "wazuh-mcp-soc": {
+      "command": "/path/to/wazuh-mcp-soc/run.sh"
     }
   }
 }

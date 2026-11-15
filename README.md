@@ -1,7 +1,6 @@
-# Wazuh MCP Local
+# Wazuh MCP SOC
 
-Dependency-free MCP stdio server and dashboard generator toolkit for a local
-Wazuh all-in-one node.
+Local MCP server and SOC dashboard toolkit for Wazuh.
 
 It connects to Wazuh Indexer/OpenSearch using the existing local admin
 certificate and can help with SOC triage, alert search, vulnerability summaries,
@@ -57,8 +56,8 @@ WAZUH_INDEXER_CA=/etc/wazuh-indexer/certs/root-ca.pem
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_ORG/wazuh-mcp-local.git
-cd wazuh-mcp-local
+git clone https://github.com/YOUR_ORG/wazuh-mcp-soc.git
+cd wazuh-mcp-soc
 ```
 
 Copy the example environment file:
@@ -121,8 +120,8 @@ export WAZUH_MCP_DASHBOARD_DIR=/tmp/wazuh-dashboards
 ## Quick Start
 
 ```bash
-git clone https://github.com/YOUR_ORG/wazuh-mcp-local.git
-cd wazuh-mcp-local
+git clone https://github.com/YOUR_ORG/wazuh-mcp-soc.git
+cd wazuh-mcp-soc
 cp .env.example .env
 python3 wazuh_mcp.py --tool health_check
 python3 wazuh_mcp.py --tool backup_saved_objects
@@ -139,8 +138,8 @@ Use stdio mode:
 ```json
 {
   "mcpServers": {
-    "wazuh-local": {
-      "command": "/path/to/wazuh-mcp-local/run.sh"
+    "wazuh-mcp-soc": {
+      "command": "/path/to/wazuh-mcp-soc/run.sh"
     }
   }
 }
