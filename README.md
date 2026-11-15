@@ -30,9 +30,34 @@ object dashboard installation.
 ## Requirements
 
 - Python 3.8+
+- Git
+- curl
 - Wazuh all-in-one or a host with network access to Wazuh Indexer
 - Certificate/key access for the Wazuh Indexer API
 - Existing Wazuh Dashboard saved object index, usually `.kibana`
+
+## Required Tools
+
+This project uses only the Python standard library. No `pip install` step is
+required.
+
+Check required tools:
+
+```bash
+python3 --version
+git --version
+curl --version
+```
+
+Install them on Ubuntu/Debian:
+
+```bash
+sudo apt update
+sudo apt install -y python3 git curl
+```
+
+Optional: use an MCP-capable client if you want to run the server through MCP.
+Dashboard installation and CLI checks only need `python3`.
 
 Default index settings:
 
