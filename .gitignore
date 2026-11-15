@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+.env
+.venv/
+venv/
+
+backups/
+*.log
+
+# Generated dashboard exports can be recreated from the Python generators.
+dashboards/*.ndjson
+
+# Local editor and OS files.
+.DS_Store
+.idea/
+.vscode/
+
+# Never commit local Wazuh/OpenSearch certificates or private keys.
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
