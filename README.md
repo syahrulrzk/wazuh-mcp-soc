@@ -27,6 +27,24 @@ object dashboard installation.
   - Vulnerability Exposure
   - FIM Overview
 
+## Dashboard Coverage
+
+The included dashboards focus on day-to-day SOC monitoring: high-priority alert
+triage, suspicious web traffic, access anomalies, SSH brute force activity,
+credential abuse, risky hosts, vulnerability exposure, and file integrity
+changes.
+
+| Dashboard | What it helps monitor |
+|---|---|
+| SOC Priority Queue | High-value alerts ranked for analyst triage. |
+| Nginx Attack Overview | Web attack patterns, noisy sources, status codes, methods, and targeted URLs. |
+| Access Anomaly | Suspicious successful or unusual access patterns that need review. |
+| SSH Brute Force Deep Dive | SSH failures, brute force rules, target users, and source IP concentration. |
+| Credential Abuse | Authentication abuse patterns, repeated failures, and suspicious login behavior. |
+| Critical Host | Hosts with concentrated high-severity activity and operational risk. |
+| Vulnerability Exposure | CVE exposure by severity, agent, package, and affected estate. |
+| FIM Overview | File integrity changes, monitored locations, agents, and rule activity. |
+
 ## Requirements
 
 - Python 3.8+

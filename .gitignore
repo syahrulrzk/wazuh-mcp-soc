@@ -23,3 +23,11 @@ dashboards/*.ndjson
 *.crt
 *.p12
 *.jks
+
+# Generated or secret notification integration state.
+install_telegram_integration.sh
+integrations/
+integrations/**/sim-wazuh/telegram.conf
+integrations/**/sim-wazuh/state/
+integrations/**/sim-wazuh/logs/
+integrations/**/sim-wazuh/*.bak.*
