@@ -52,6 +52,72 @@ WAZUH_INDEXER_KEY=/etc/wazuh-indexer/certs/admin-key.pem
 WAZUH_INDEXER_CA=/etc/wazuh-indexer/certs/root-ca.pem
 ```
 
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/YOUR_ORG/wazuh-mcp-local.git
+cd wazuh-mcp-local
+```
+
+Copy the example environment file:
+
+```bash
+cp .env.example .env
+```
+
+Review `.env` and adjust the Indexer URL, index names, or certificate paths if
+your Wazuh installation uses different values:
+
+```bash
+nano .env
+```
+
+Load the environment variables for the current shell if you changed `.env`:
+
+```bash
+set -a
+. ./.env
+set +a
+```
+
+Test the connection:
+
+```bash
+python3 wazuh_mcp.py --tool health_check
+```
+
+If `health_check` returns cluster health and document counts, the MCP server can
+read from Wazuh Indexer.
+
+Back up Wazuh Dashboard saved objects before installing dashboards:
+
+```bash
+python3 wazuh_mcp.py --tool backup_saved_objects
+```
+
+Install dashboards:
+
+```bash
+python3 create_nginx_dashboard.py --install
+python3 create_access_anomaly_dashboard.py --install
+python3 create_auth_dashboard.py --install
+python3 create_ssh_bruteforce_dashboard.py --install
+python3 create_soc_expansion_dashboards.py --install
+python3 create_soc_priority_dashboard.py --install
+python3 create_fim_dashboard.py --install
+```
+
+Dashboard installer scripts write directly to the local `.kibana` saved object
+index. The certificate/user must have permission to write saved objects.
+
+Generated NDJSON files are written to `./dashboards` by default. Override with:
+
+```bash
+export WAZUH_MCP_DASHBOARD_DIR=/tmp/wazuh-dashboards
+```
+
 ## Quick Start
 
 ```bash
@@ -59,6 +125,8 @@ git clone https://github.com/YOUR_ORG/wazuh-mcp-local.git
 cd wazuh-mcp-local
 cp .env.example .env
 python3 wazuh_mcp.py --tool health_check
+python3 wazuh_mcp.py --tool backup_saved_objects
+python3 create_soc_priority_dashboard.py --install
 ```
 
 The scripts read configuration from environment variables. You can either
@@ -91,32 +159,6 @@ python3 wazuh_mcp.py --tool analyze_authentication_traffic --args '{"hours":24,"
 python3 wazuh_mcp.py --tool analyze_ssh_bruteforce --args '{"hours":24,"size":10}'
 python3 wazuh_mcp.py --tool analyze_soc_priority_queue --args '{"hours":24,"size":10}'
 python3 wazuh_mcp.py --tool backup_saved_objects
-```
-
-## Install Dashboards
-
-Back up saved objects first:
-
-```bash
-python3 wazuh_mcp.py --tool backup_saved_objects
-```
-
-Install individual dashboards:
-
-```bash
-python3 create_nginx_dashboard.py --install
-python3 create_access_anomaly_dashboard.py --install
-python3 create_auth_dashboard.py --install
-python3 create_ssh_bruteforce_dashboard.py --install
-python3 create_soc_expansion_dashboards.py --install
-python3 create_soc_priority_dashboard.py --install
-python3 create_fim_dashboard.py --install
-```
-
-Generated NDJSON files are written to `./dashboards` by default. Override with:
-
-```bash
-export WAZUH_MCP_DASHBOARD_DIR=/tmp/wazuh-dashboards
 ```
 
 ## MCP Tools
