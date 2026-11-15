@@ -56,7 +56,7 @@ WAZUH_INDEXER_CA=/etc/wazuh-indexer/certs/root-ca.pem
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_ORG/wazuh-mcp-soc.git
+git clone https://github.com/syahrulrzk/wazuh-mcp-soc.git
 cd wazuh-mcp-soc
 ```
 
@@ -120,7 +120,7 @@ export WAZUH_MCP_DASHBOARD_DIR=/tmp/wazuh-dashboards
 ## Quick Start
 
 ```bash
-git clone https://github.com/YOUR_ORG/wazuh-mcp-soc.git
+git clone https://github.com/syahrulrzk/wazuh-mcp-soc.git
 cd wazuh-mcp-soc
 cp .env.example .env
 python3 wazuh_mcp.py --tool health_check
